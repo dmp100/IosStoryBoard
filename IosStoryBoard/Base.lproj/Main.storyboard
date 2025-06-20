@@ -29,7 +29,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u56-WY-Rj8">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u56-WY-Rj8">
                                 <rect key="frame" x="159" y="477" width="75" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -58,6 +58,10 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" distribution="equalSpacing" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="1bb-4m-hMp">
+                                <rect key="frame" x="141" y="572" width="110" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -67,6 +71,7 @@
                         <outlet property="EnterID" destination="S6p-It-a5e" id="8Tf-4u-Y3X"/>
                         <outlet property="EnterPassword" destination="GKs-Ln-Ui2" id="yBc-w3-YDF"/>
                         <outlet property="LoginBtn" destination="u56-WY-Rj8" id="sDo-sn-iFg"/>
+                        <outlet property="MainIcon" destination="LLV-s4-fXi" id="lIf-3f-gZG"/>
                         <outlet property="SignUPBtn" destination="qXN-Ce-RSv" id="H0H-7Z-WlX"/>
                     </connections>
                 </viewController>
