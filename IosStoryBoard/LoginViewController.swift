@@ -59,11 +59,17 @@ class LoginViewController: UIViewController {
         LoginBtn.layer.cornerRadius = 8
         LoginBtn.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
 
+        // 로그인 버튼 액션 추가
+        LoginBtn.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+
         // 회원가입 버튼 설정
         SignUPBtn.setTitle("회원가입", for: .normal)
         SignUPBtn.setTitleColor(UIColor(red: 34/255, green: 139/255, blue: 34/255, alpha: 1.0), for: .normal) // 진초록색
         SignUPBtn.backgroundColor = .clear
         SignUPBtn.tintColor = UIColor(red: 76/255, green: 217/255, blue: 100/255, alpha: 1.0)
+
+        // 회원가입 버튼 액션 추가
+        SignUPBtn.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
     }
 
     func setupLayout() {
@@ -108,5 +114,46 @@ class LoginViewController: UIViewController {
             SignUPBtn.topAnchor.constraint(equalTo: LoginBtn.bottomAnchor, constant: 16),
             SignUPBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
+    }
+
+    // MARK: - Button Actions
+    @objc private func loginButtonTapped() {
+        print("로그인 버튼 탭됨")
+
+        // 간단한 검증 (실제로는 서버 통신)
+        guard let email = EnterID.text, !email.isEmpty,
+              let password = EnterPassword.text, !password.isEmpty else {
+            showAlert(message: "이메일과 비밀번호를 입력해주세요.")
+            return
+        }
+
+        // 임시로 바로 메인 화면으로 이동
+        navigateToMainScreen()
+    }
+
+    @objc private func signUpButtonTapped() {
+        print("회원가입 버튼 탭됨")
+        // 회원가입 화면으로 이동하는 로직 추가
+    }
+
+    // MARK: - Navigation
+    private func navigateToMainScreen() {
+        print("로그인 성공 - 메인 화면으로 이동")
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
+
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first {
+            window.rootViewController = tabBarController
+            window.makeKeyAndVisible()
+        }
+    }
+
+    // MARK: - Helper Methods
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }

@@ -1,13 +1,13 @@
 //
-//  DiaryWriteViewController.swift
+//  ListViewController.swift
 //  IosStoryBoard
 //
-//  Created by 성규현 on 6/18/25.
+//  Created by 성규현 on 6/20/25.
 //
 
 import UIKit
 
-class DiaryWriteViewController: UIViewController {
+class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

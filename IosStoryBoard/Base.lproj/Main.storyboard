@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NfR-sV-WTf">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
@@ -77,57 +77,209 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23.664122137404579" y="-34.507042253521128"/>
+            <point key="canvasLocation" x="-853" y="-156"/>
         </scene>
-        <!--Diary List View Controller-->
-        <scene sceneID="Lhm-IP-ruI">
+        <!--Chat-->
+        <scene sceneID="zA7-TJ-1wn">
             <objects>
-                <viewController id="Hdr-JV-yFY" customClass="DiaryListViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zQG-eZ-1S5">
+                <viewController id="94X-cA-hzf" customClass="ChatViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DPB-Zz-POY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="rTN-dX-N5W"/>
+                        <viewLayoutGuide key="safeArea" id="58c-uf-EIV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Chat" image="message.fill" catalog="system" id="AcF-Gx-xQ4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sah-b9-piF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yij-gx-3zZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2234" y="-35"/>
+            <point key="canvasLocation" x="2073" y="754"/>
         </scene>
-        <!--Diary Write View Controller-->
-        <scene sceneID="0Be-xc-QDK">
+        <!--List-->
+        <scene sceneID="B8k-5j-fKb">
             <objects>
-                <viewController id="AGg-qc-QR0" customClass="DiaryWriteViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="N9d-dF-kXQ">
+                <viewController id="YhK-ts-GSP" customClass="ListViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2jB-hR-rb4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Vs3-cK-nLl"/>
+                        <viewLayoutGuide key="safeArea" id="9r3-Ct-CCY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="List" image="list.dash" catalog="system" id="jsj-yD-bEd"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PNv-t3-z5u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDv-qn-udv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="763" y="-35"/>
+            <point key="canvasLocation" x="2073" y="-12"/>
         </scene>
-        <!--Diary Detail View Controller-->
-        <scene sceneID="WZZ-Hf-oVb">
+        <!--Home-->
+        <scene sceneID="c6O-9H-Oef">
             <objects>
-                <viewController id="RtY-KI-2tu" customClass="DiaryDetailViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="yNH-KT-4Jy">
+                <viewController id="NfR-sV-WTf" customClass="HomeViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WWA-Fy-6na">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="s8Q-IQ-W4h"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YRi-A6-1sj">
+                                <rect key="frame" x="0.0" y="68" width="393" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jOa-ip-108">
+                                        <rect key="frame" x="8" y="13" width="377" height="630"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l9R-HT-Aes">
+                                                <rect key="frame" x="36" y="45" width="305" height="101"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="오늘도 감사한 하루" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACS-nq-VdY">
+                                                        <rect key="frame" x="24" y="24" width="246" height="29"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2024.06.20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V69-hc-kVW">
+                                                        <rect key="frame" x="24" y="61" width="256" height="19"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJd-8H-MHZ">
+                                                <rect key="frame" x="36" y="253" width="305" height="267"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="첫 번째" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9YB-Sq-1BG">
+                                                        <rect key="frame" x="32" y="21" width="240" height="57"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="textColor" systemColor="labelColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="두 번째" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="co8-87-RQj">
+                                                        <rect key="frame" x="32" y="105" width="240" height="57"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="textColor" systemColor="labelColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="세 번째" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pHs-d2-whw">
+                                                        <rect key="frame" x="32" y="186" width="240" height="57"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <color key="textColor" systemColor="labelColor"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dK6-7D-YPZ">
+                                                <rect key="frame" x="115" y="557" width="146" height="35"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="감정일기 저장하기"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="오늘의 세가지 감정일기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOS-BO-avH">
+                                                <rect key="frame" x="36" y="177" width="156" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="50자 이내로 적어주세요 !" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ghI-nU-rE2">
+                                                <rect key="frame" x="36" y="206" width="123" height="15"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" white="0.38" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="RJP-Hu-8Yw"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Tvy-YE-LP2"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vlD-xd-wlA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Home" image="house" catalog="system" id="hfS-Sr-FTL"/>
+                    <connections>
+                        <outlet property="contentView" destination="jOa-ip-108" id="yEQ-jD-lPv"/>
+                        <outlet property="dateLabel" destination="V69-hc-kVW" id="RjU-4F-XQS"/>
+                        <outlet property="gratitudeContainer" destination="aJd-8H-MHZ" id="Vlh-xx-1x5"/>
+                        <outlet property="gratitudeTitle" destination="zOS-BO-avH" id="dzd-va-zSN"/>
+                        <outlet property="saveButton" destination="dK6-7D-YPZ" id="o8x-vh-hBh"/>
+                        <outlet property="scrollView" destination="YRi-A6-1sj" id="qSm-8V-f06"/>
+                        <outlet property="textView1" destination="9YB-Sq-1BG" id="dW8-LT-6L3"/>
+                        <outlet property="textView2" destination="co8-87-RQj" id="ifa-CF-JY4"/>
+                        <outlet property="textView3" destination="pHs-d2-whw" id="naK-Ij-Oy0"/>
+                        <outlet property="titleLabel" destination="ACS-nq-VdY" id="Ref-76-M0g"/>
+                        <outlet property="welcomeContainer" destination="l9R-HT-Aes" id="37d-KV-Lrd"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UBY-7C-lma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5lc-uL-MjQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1515" y="-35"/>
+            <point key="canvasLocation" x="2072.5190839694656" y="-758.45070422535218"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="LR4-7U-M2L">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarController" id="fwF-qK-scf" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="pwg-i5-HHh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="NfR-sV-WTf" kind="relationship" relationship="viewControllers" id="PpA-6R-M7f"/>
+                        <segue destination="YhK-ts-GSP" kind="relationship" relationship="viewControllers" id="Zrq-tp-cfG"/>
+                        <segue destination="94X-cA-hzf" kind="relationship" relationship="viewControllers" id="gpi-gx-hxk"/>
+                        <segue destination="pKl-pZ-QQp" kind="relationship" relationship="viewControllers" id="fKi-sq-Tzt"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XKT-6T-elJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="315" y="-169"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="nIj-cu-dCd">
+            <objects>
+                <viewController title="Profile" id="pKl-pZ-QQp" customClass="ProfileViewController" customModule="IosStoryBoard" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="l0W-Zw-MHh">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Aa0-jd-5Gx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person.crop.circle.fill" catalog="system" id="EAO-al-Iak"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Qh-rf-Ted" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2073" y="-1470"/>
         </scene>
     </scenes>
     <resources>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="message.fill" catalog="system" width="128" height="114"/>
+        <image name="person.crop.circle.fill" catalog="system" width="128" height="123"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
