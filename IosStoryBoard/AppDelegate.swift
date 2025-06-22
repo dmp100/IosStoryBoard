@@ -14,8 +14,6 @@ let supabase = SupabaseClient(
   supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNnY25lZnp3Z2RuaGticnF3YmRzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyMjQ5NzMsImV4cCI6MjA2NTgwMDk3M30.KQUo17ubwUAXRVkNIyjdYmBWZsqqQ2IN76EFleIuJsQ"
 )
 
-
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

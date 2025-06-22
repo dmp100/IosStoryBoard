@@ -133,7 +133,38 @@ class LoginViewController: UIViewController {
 
     @objc private func signUpButtonTapped() {
         print("회원가입 버튼 탭됨")
-        // 회원가입 화면으로 이동하는 로직 추가
+        navigateToSignUpScreen()
+    }
+
+    // MARK: - Navigation
+    private func navigateToSignUpScreen() {
+        print("회원가입 화면으로 이동")
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        // 안전하게 뷰 컨트롤러 생성
+        guard let signUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpViewController") as? SignUpViewController else {
+            print("❌ SignUpViewController를 찾을 수 없습니다. Storyboard ID를 확인하세요.")
+            return
+        }
+
+        print("✅ SignUpViewController 생성 성공")
+
+        // 방법 1: Present (모달로 띄우기)
+        signUpViewController.modalPresentationStyle = .fullScreen
+        present(signUpViewController, animated: true) {
+            print("✅ Present 완료")
+        }
+
+        // 방법 2: Push (네비게이션으로 이동) - 만약 NavigationController를 사용한다면
+        /*
+        if let navController = navigationController {
+            navController.pushViewController(signUpViewController, animated: true)
+            print("✅ Push 완료")
+        } else {
+            print("❌ NavigationController가 없습니다.")
+        }
+        */
     }
 
     // MARK: - Navigation
