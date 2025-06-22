@@ -120,16 +120,31 @@ class LoginViewController: UIViewController {
     @objc private func loginButtonTapped() {
         print("로그인 버튼 탭됨")
 
-        // 간단한 검증 (실제로는 서버 통신)
         guard let email = EnterID.text, !email.isEmpty,
               let password = EnterPassword.text, !password.isEmpty else {
             showAlert(message: "이메일과 비밀번호를 입력해주세요.")
             return
         }
 
-        // 임시로 바로 메인 화면으로 이동
-        navigateToMainScreen()
+        Task {
+            do {
+                // Supabase 로그인 요청
+                let session = try await supabase.auth.signIn(email: email, password: password)
+
+                print("✅ 로그인 성공: \(session.user.email ?? "이메일 없음")")
+
+                await MainActor.run {
+                    self.navigateToMainScreen()
+                }
+            } catch {
+                print("❌ 로그인 실패: \(error.localizedDescription)")
+                await MainActor.run {
+                    self.showAlert(message: "로그인에 실패했습니다.\n에러: \(error.localizedDescription)")
+                }
+            }
+        }
     }
+
 
     @objc private func signUpButtonTapped() {
         print("회원가입 버튼 탭됨")

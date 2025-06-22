@@ -35,6 +35,9 @@
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="회원가입"/>
+                                <connections>
+                                    <action selector="signUpButtonTapped:" destination="zq7-aH-chN" eventType="touchUpInside" id="VZ7-mM-GZZ"/>
+                                </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="zPS-qt-Sxl">
                                 <rect key="frame" x="111" y="684" width="169" height="112"/>

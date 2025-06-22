@@ -215,7 +215,7 @@ class SignUpViewController: UIViewController {
         }
 
         // 실제 Supabase 회원가입 코드 (주석 처리)
-        /*
+
         Task {
             do {
                 let response = try await supabase.auth.signUp(
@@ -228,8 +228,7 @@ class SignUpViewController: UIViewController {
                 await MainActor.run {
                     showLoading(false)
                     showAlert(title: "회원가입 완료", message: "회원가입이 완료되었습니다!") { [weak self] in
-                        // 회원가입 성공 후 메인 화면으로 이동
-                        self?.navigateToMainScreen()
+                        self?.dismiss(animated: true) // 로그인 화면으로 돌아감
                     }
                 }
 
@@ -241,28 +240,28 @@ class SignUpViewController: UIViewController {
                 }
             }
         }
-        */
+
     }
 
     // MARK: - Navigation
-    private func navigateToMainScreen() {
-        print("메인 화면으로 이동 시도")
-
-        // ChatViewController로 이동 (메인 화면)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let chatVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
-
-            // 네비게이션 스택을 완전히 교체
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let window = windowScene.windows.first {
-                let navController = UINavigationController(rootViewController: chatVC)
-                window.rootViewController = navController
-                window.makeKeyAndVisible()
-            }
-        } else {
-            print("ChatViewController를 찾을 수 없습니다")
-        }
-    }
+//    private func navigateToMainScreen() {
+//        print("메인 화면으로 이동 시도")
+//
+//        // ChatViewController로 이동 (메인 화면)
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        if let chatVC = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+//
+//            // 네비게이션 스택을 완전히 교체
+//            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//               let window = windowScene.windows.first {
+//                let navController = UINavigationController(rootViewController: chatVC)
+//                window.rootViewController = navController
+//                window.makeKeyAndVisible()
+//            }
+//        } else {
+//            print("ChatViewController를 찾을 수 없습니다")
+//        }
+//    }
 
     // MARK: - Helper Methods
     private func showLoading(_ show: Bool) {
