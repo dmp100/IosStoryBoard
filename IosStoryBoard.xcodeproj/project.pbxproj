@@ -13,6 +13,8 @@
 		5FA3B6772E07E28500DBD537 /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA3B6762E07E28500DBD537 /* Realtime */; };
 		5FA3B6792E07E28500DBD537 /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA3B6782E07E28500DBD537 /* Storage */; };
 		5FA3B67B2E07E28500DBD537 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA3B67A2E07E28500DBD537 /* Supabase */; };
+		5FA3B68A2E08190E00DBD537 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA3B6892E08190E00DBD537 /* OpenAI */; };
+		5FA3B68D2E081E8A00DBD537 /* SwiftOpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 5FA3B68C2E081E8A00DBD537 /* SwiftOpenAI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 				5FA3B6732E07E28500DBD537 /* Functions in Frameworks */,
 				5FA3B67B2E07E28500DBD537 /* Supabase in Frameworks */,
 				5FA3B6712E07E28500DBD537 /* Auth in Frameworks */,
+				5FA3B68D2E081E8A00DBD537 /* SwiftOpenAI in Frameworks */,
+				5FA3B68A2E08190E00DBD537 /* OpenAI in Frameworks */,
 				5FA3B6792E07E28500DBD537 /* Storage in Frameworks */,
 				5FA3B6772E07E28500DBD537 /* Realtime in Frameworks */,
 			);
@@ -107,6 +111,8 @@
 				5FA3B6762E07E28500DBD537 /* Realtime */,
 				5FA3B6782E07E28500DBD537 /* Storage */,
 				5FA3B67A2E07E28500DBD537 /* Supabase */,
+				5FA3B6892E08190E00DBD537 /* OpenAI */,
+				5FA3B68C2E081E8A00DBD537 /* SwiftOpenAI */,
 			);
 			productName = IosStoryBoard;
 			productReference = 5F495A5E2D8BDE1900BD11F1 /* IosStoryBoard.app */;
@@ -138,6 +144,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5FA3B66E2E07E27500DBD537 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				5FA3B6882E08190E00DBD537 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				5FA3B68B2E081E8A00DBD537 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5F495A5F2D8BDE1900BD11F1 /* Products */;
@@ -377,6 +385,22 @@
 				minimumVersion = 2.5.1;
 			};
 		};
+		5FA3B6882E08190E00DBD537 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.3;
+			};
+		};
+		5FA3B68B2E081E8A00DBD537 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jamesrochabrun/SwiftOpenAI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -409,6 +433,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5FA3B66E2E07E27500DBD537 /* XCRemoteSwiftPackageReference "supabase-swift" */;
 			productName = Supabase;
+		};
+		5FA3B6892E08190E00DBD537 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FA3B6882E08190E00DBD537 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		5FA3B68C2E081E8A00DBD537 /* SwiftOpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5FA3B68B2E081E8A00DBD537 /* XCRemoteSwiftPackageReference "SwiftOpenAI" */;
+			productName = SwiftOpenAI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

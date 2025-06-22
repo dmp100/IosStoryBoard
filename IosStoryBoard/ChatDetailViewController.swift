@@ -1,4 +1,3 @@
-
 //
 //  ChatDetailViewController.swift
 //  IosStoryBoard
@@ -10,36 +9,32 @@ import UIKit
 
 class ChatDetailViewController: UIViewController {
 
-    // MARK: - IBOutlets (현재 스토리보드 구조에 맞춤)
-    @IBOutlet weak var summaryLabel: UILabel!            // 상단 Label (감사일기 요약)
-    @IBOutlet weak var additionalLabel: UILabel!         // 중간 Label (추가 정보)
-    @IBOutlet weak var scrollView: UIScrollView!         // Scroll View
-    @IBOutlet weak var stackView: UIStackView!           // Stack View
-    @IBOutlet weak var inputContainer: UIView!           // Stack View 안의 View (입력 영역)
-    @IBOutlet weak var chatTextField: UITextField!       // Round Style Text Field
-    @IBOutlet weak var sendButton: UIButton!            // Button (→)
-
-    // MARK: - 채팅 메시지 Label IBOutlets (2개만 사용)
-    @IBOutlet weak var aiMessageLabel1: UILabel!         // AI 메시지용 Label
-    @IBOutlet weak var userMessageLabel1: UILabel!       // 사용자 메시지용 Label
+    // MARK: - IBOutlets
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var additionalLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var inputContainer: UIView!
+    @IBOutlet weak var chatTextField: UITextField!
+    @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var aiMessageLabel1: UILabel!
+    @IBOutlet weak var userMessageLabel1: UILabel!
 
     // MARK: - Properties
-    var selectedCharacter: Character?  // ✅ 이제 공통 Character 구조체 사용
+    var selectedCharacter: Character?
     private var chatMessages: [ChatMessage] = []
 
-    // ⚠️ ChatMessage 구조체 정의 제거 (Character.swift에 있음)
+    // OpenAI 설정
+    private let apiKey = ""
+    private let apiURL = "https://api.openai.com/v1/chat/completions"
+    private var conversationHistory: [[String: Any]] = []
+    private var currentGratitudeDiary: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
         setupUI()
-        loadGratitudeSummary()
-
-        // 초기 Label 설정
         setupMessageLabels()
-
-        // AI 첫 메시지 생성
-        generateInitialAIMessage()
 
         // 키보드 노티피케이션 등록
         NotificationCenter.default.addObserver(
@@ -48,13 +43,18 @@ class ChatDetailViewController: UIViewController {
             name: UIResponder.keyboardWillShowNotification,
             object: nil
         )
-
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+
+        // 비동기 데이터 로딩
+        Task {
+            await loadGratitudeSummary()
+            await generateInitialAIMessage()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,7 +64,6 @@ class ChatDetailViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             self.scrollToBottom()
         }
@@ -75,19 +74,237 @@ class ChatDetailViewController: UIViewController {
     }
 }
 
+// MARK: - OpenAI API 연동 (직접 HTTP 요청)
+extension ChatDetailViewController {
+
+    private func getCharacterSystemPrompt() -> String {
+            guard let character = selectedCharacter else {
+                return "당신은 친근하고 따뜻한 AI 어시스턴트입니다."
+            }
+
+            switch character.id {
+            case "sakura":
+                return """
+                당신은 사쿠라입니다. 따뜻하고 공감적인 감정 상담사로서 다음과 같이 행동합니다:
+                
+                성격과 말투:
+                - 부드럽고 포근한 말투로 대화
+                - 사용자의 감정에 깊이 공감하고 이해
+                - 따뜻한 격려와 위로를 제공
+                - 자연스럽고 친근한 표현 사용
+                - 이모지를 적절히 사용 🌸
+                
+                대화 방식:
+                - 반드시 감사일기 내용을 먼저 읽고 구체적으로 언급하며 인사
+                - 감사일기의 각 항목에 대해 공감적 반응
+                - 사용자의 감정을 세심하게 파악하고 반영
+                - 따뜻한 질문으로 대화를 이어나가기
+                """
+            case "owl":
+                return """
+                당신은 올빼미 박사입니다. 논리적이고 현명한 심리 상담사로서 다음과 같이 행동합니다:
+                
+                성격과 말투:
+                - 차분하고 현명한 말투로 대화
+                - 분석적이면서도 따뜻한 접근
+                - 심리학적 관점에서의 통찰 제공
+                - 체계적이고 논리적인 조언
+                - 이모지를 절제있게 사용 🦉
+                
+                대화 방식:
+                - 반드시 감사일기 내용을 먼저 분석적으로 읽고 언급하며 인사
+                - 감사일기에서 패턴이나 의미를 찾아 설명
+                - 심리적 관점에서 감사의 효과나 의미 해석
+                - 깊이 있는 질문으로 자기 성찰 유도
+                """
+            default:
+                return "당신은 친근하고 따뜻한 AI 어시스턴트입니다."
+            }
+        }
+
+        private func generateInitialAIMessage() async {
+            let characterName = selectedCharacter?.name ?? "캐릭터"
+            let systemPrompt = getCharacterSystemPrompt()
+
+            let userPrompt = """
+            안녕하세요! 저는 \(characterName)입니다.
+            
+            사용자가 오늘 작성한 감사일기입니다:
+            \(currentGratitudeDiary)
+            
+            위의 감사일기 내용을 구체적으로 읽고 언급하면서, 당신의 캐릭터 성격에 맞는 따뜻한 첫 인사말을 해주세요. 
+            감사일기의 각 항목에 대해 공감하며 대화를 시작해주세요.
+            """
+
+            // 대화 기록 초기화
+            conversationHistory = [
+                ["role": "system", "content": systemPrompt],
+                ["role": "user", "content": userPrompt]
+            ]
+
+            await getChatResponse()
+        }
+    private func generateAIResponse(to userMessage: String) async {
+        // 사용자 메시지를 대화 기록에 추가
+        conversationHistory.append(["role": "user", "content": userMessage])
+
+        await getChatResponse()
+    }
+
+    private func getChatResponse() async {
+        let requestBody: [String: Any] = [
+            "model": "gpt-4o",
+            "messages": conversationHistory,
+            "temperature": 0.8,
+            "max_tokens": 500
+        ]
+
+        guard let url = URL(string: apiURL) else {
+            await MainActor.run {
+                showErrorMessage()
+            }
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody)
+
+            let (data, _) = try await URLSession.shared.data(for: request)
+
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let choices = json["choices"] as? [[String: Any]],
+               let firstChoice = choices.first,
+               let message = firstChoice["message"] as? [String: Any],
+               let content = message["content"] as? String {
+
+                print("✅ AI 응답: \(content)")
+
+                // AI 응답을 대화 기록에 추가
+                conversationHistory.append(["role": "assistant", "content": content])
+
+                await MainActor.run {
+                    let aiMessage = ChatMessage(text: content, isFromUser: false, timestamp: Date())
+                    self.addMessage(aiMessage)
+                }
+            } else {
+                print("❌ AI 응답 파싱 실패")
+                await MainActor.run {
+                    showErrorMessage()
+                }
+            }
+
+        } catch {
+            print("❌ AI 응답 생성 실패: \(error)")
+            await MainActor.run {
+                showErrorMessage()
+            }
+        }
+    }
+
+    // 헬퍼 함수
+    private func showErrorMessage() {
+        let errorMessage = "죄송해요, 잠시 문제가 있는 것 같아요. 다시 말씀해 주시겠어요?"
+        let aiMessage = ChatMessage(text: errorMessage, isFromUser: false, timestamp: Date())
+        addMessage(aiMessage)
+    }
+}
+
+// MARK: - Data Loading
+extension ChatDetailViewController {
+
+    private func loadGratitudeSummary() async {
+        // 임시로 샘플 데이터 사용 (Supabase 연동 시 교체)
+        currentGratitudeDiary = """
+        1. 아침에 따뜻한 햇살이 창문을 통해 들어와서 기분이 좋았다
+        2. 동료가 맛있는 커피를 사주어서 감사했다
+        3. 가족들과 함께 저녁식사를 할 수 있어서 행복했다
+        """
+
+        await MainActor.run {
+            summaryLabel.text = "📝 오늘의 감사일기\n\n\(currentGratitudeDiary)"
+            additionalLabel.text = "캐릭터가 감사일기를 바탕으로 대화를 시작합니다"
+            additionalLabel.font = UIFont.pretendardMedium(size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
+            additionalLabel.textColor = UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0)
+            additionalLabel.textAlignment = .center
+        }
+
+        /* Supabase 연동 코드 (필요시 활성화)
+        guard let userId = try? await SupabaseManager.shared.client.auth.user().id.uuidString else {
+            print("❌ 사용자 정보를 가져올 수 없습니다")
+            return
+        }
+
+        do {
+            let today = Calendar.current.startOfDay(for: Date())
+            let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: today)!
+
+            let formatter = ISO8601DateFormatter()
+            formatter.timeZone = TimeZone(identifier: "UTC")
+
+            let startDate = formatter.string(from: today)
+            let endDate = formatter.string(from: tomorrow)
+
+            // Supabase에서 오늘의 감사일기 조회
+            let response: [GratitudeDiaryResponse] = try await SupabaseManager.shared.client
+                .from("gratitude_diary")
+                .select()
+                .eq("user_id", value: userId)
+                .gte("created_at", value: startDate)
+                .lt("created_at", value: endDate)
+                .order("created_at", ascending: false)
+                .execute()
+                .value
+
+            print("✅ 감사일기 조회 완료: \(response.count)개")
+
+            await MainActor.run {
+                if response.isEmpty {
+                    self.currentGratitudeDiary = "오늘은 아직 감사일기를 작성하지 않았습니다."
+                    self.summaryLabel.text = "📝 오늘의 감사일기\n\n아직 작성된 감사일기가 없습니다.\n홈 탭에서 감사일기를 작성해보세요! 😊"
+                } else {
+                    var gratitudeText = ""
+                    for (index, entry) in response.prefix(3).enumerated() {
+                        gratitudeText += "\(index + 1). \(entry.content)\n"
+                    }
+
+                    self.currentGratitudeDiary = gratitudeText
+                    self.summaryLabel.text = "📝 오늘의 감사일기\n\n\(gratitudeText)"
+                }
+
+                self.additionalLabel.text = "캐릭터가 감사일기를 바탕으로 대화를 시작합니다"
+                self.additionalLabel.font = UIFont.pretendardMedium(size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
+                self.additionalLabel.textColor = UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0)
+                self.additionalLabel.textAlignment = .center
+            }
+
+        } catch {
+            print("❌ 감사일기 조회 실패: \(error)")
+            await MainActor.run {
+                self.currentGratitudeDiary = "감사일기를 불러오는 중 오류가 발생했습니다."
+                self.summaryLabel.text = "📝 오늘의 감사일기\n\n감사일기를 불러오는 중 오류가 발생했습니다."
+            }
+        }
+        */
+    }
+}
+
 // MARK: - UI Setup
 extension ChatDetailViewController {
 
     private func setupUI() {
         view.backgroundColor = UIColor(red: 248/255, green: 255/255, blue: 254/255, alpha: 1.0)
-
         setupSummaryCard()
         setupChatArea()
         setupInputArea()
     }
 
     private func setupMessageLabels() {
-        // AI 메시지 Label 설정 (완전 중앙 정렬)
+        // AI 메시지 Label 설정
         if let aiLabel = aiMessageLabel1 {
             aiLabel.isHidden = true
             aiLabel.numberOfLines = 0
@@ -97,16 +314,9 @@ extension ChatDetailViewController {
             aiLabel.backgroundColor = UIColor(red: 245/255, green: 245/255, blue: 245/255, alpha: 1.0)
             aiLabel.textColor = UIColor(red: 29/255, green: 29/255, blue: 31/255, alpha: 1.0)
             aiLabel.textAlignment = .center
-
-            // 패딩을 위한 inset 설정
-            aiLabel.layer.sublayerTransform = CATransform3DMakeTranslation(0, 0, 0)
-
-            // 예시 AI 메시지 추가
-            aiLabel.text = "안녕하세요! 오늘 하루는 어떠셨나요? 😊"
-            aiLabel.isHidden = false
         }
 
-        // 사용자 메시지 Label 설정 (완전 중앙 정렬)
+        // 사용자 메시지 Label 설정
         if let userLabel = userMessageLabel1 {
             userLabel.isHidden = true
             userLabel.numberOfLines = 0
@@ -124,7 +334,6 @@ extension ChatDetailViewController {
             title = "대화 화면"
             return
         }
-
         title = "\(character.emoji) \(character.name)와 대화"
         setupNavigationBarStyle()
     }
@@ -168,10 +377,9 @@ extension ChatDetailViewController {
         scrollView.layer.shadowRadius = 12
         scrollView.layer.shadowOpacity = 1.0
 
-        // StackView 설정 - 중앙 정렬을 위해 alignment 변경
         stackView.axis = .vertical
-        stackView.spacing = 12  // 간격을 조금 더 넓게
-        stackView.alignment = .center  // 중앙 정렬로 변경
+        stackView.spacing = 12
+        stackView.alignment = .center
         stackView.distribution = .equalSpacing
         stackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -210,61 +418,15 @@ extension ChatDetailViewController {
         sendButton.layer.shadowRadius = 4
         sendButton.layer.shadowOpacity = 1.0
     }
-}
 
-// MARK: - Data Loading
-extension ChatDetailViewController {
-
-    private func loadGratitudeSummary() {
-        guard summaryLabel != nil, additionalLabel != nil else { return }
-
-        let summaryTitle = "  📝 오늘의 감사일기\n\n"
-        let sampleGratitude = """
-          1. 아침에 따뜻한 햇살이 창문을 통해 들어와서 기분이 좋았다
-          2. 동료가 맛있는 커피를 사주어서 감사했다
-          3. 가족들과 함께 저녁식사를 할 수 있어서 행복했다
-        """
-
-        summaryLabel.text = summaryTitle + sampleGratitude
-
-        additionalLabel.text = "캐릭터가 감사일기를 바탕으로 대화를 시작합니다"
-        additionalLabel.font = UIFont.pretendardMedium(size: 14) ?? UIFont.systemFont(ofSize: 14, weight: .medium)
-        additionalLabel.textColor = UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0)
-        additionalLabel.textAlignment = .center
-    }
-
-    private func generateInitialAIMessage() {
-        guard let character = selectedCharacter else {
-            print("❌ selectedCharacter가 nil입니다")
-            return
-        }
-
-        print("✅ AI 첫 메시지 생성 시작 - 캐릭터: \(character.name)")
-
-        let initialMessage: String
-        switch character.id {
-        case "sakura":
-            initialMessage = "안녕하세요! 🌸 오늘 작성하신 감사일기를 읽어보니 정말 따뜻한 하루를 보내셨네요. 특히 아침 햇살에 대한 감사가 인상적이었어요. 그때 어떤 기분이 드셨나요?"
-        case "owl":
-            initialMessage = "안녕하세요. 🦉 오늘의 감사일기를 분석해보니 인간관계와 자연에 대한 감사가 균형있게 표현되어 있습니다. 이러한 다양한 영역의 감사는 심리적 안정감을 높이는데 도움이 됩니다. 어떤 부분이 가장 의미있게 느껴지셨나요?"
-        case "rabbit":
-            initialMessage = "안녕하세요! 🐰 와~ 오늘 정말 멋진 하루를 보내셨네요! 햇살, 커피, 가족과의 시간까지! 이렇게 좋은 일들이 가득한 날이라니 정말 기분이 좋아집니다! 이 중에서 가장 기억에 남는 순간은 무엇인가요?"
-        default:
-            initialMessage = "안녕하세요! 오늘 작성하신 감사일기를 바탕으로 대화를 시작해보겠습니다."
-        }
-
-        print("✅ 생성된 메시지: \(initialMessage)")
-
-        let aiMessage = ChatMessage(text: initialMessage, isFromUser: false, timestamp: Date())
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            print("✅ AI 메시지 추가 실행")
-            self.addMessage(aiMessage)
-        }
+    private func showSimpleAlert(message: String) {
+        let alert = UIAlertController(title: "알림", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        present(alert, animated: true)
     }
 }
 
-// MARK: - Chat Functions (완전 중앙 정렬 버전)
+// MARK: - Chat Functions
 extension ChatDetailViewController {
 
     private func addMessage(_ message: ChatMessage) {
@@ -273,44 +435,33 @@ extension ChatDetailViewController {
         chatMessages.append(message)
 
         if message.isFromUser {
-            // 사용자 메시지 처리
             if let userLabel = userMessageLabel1 {
-                // 기존에 표시된 메시지가 있으면 복사본 생성
                 if !userLabel.isHidden {
                     createCopyLabel(from: userLabel)
                 }
-
-                // 새 메시지 표시 (깔끔한 중앙 정렬)
                 userLabel.text = message.text
                 userLabel.textAlignment = .center
                 userLabel.isHidden = false
             }
         } else {
-            // AI 메시지 처리
             if let aiLabel = aiMessageLabel1 {
-                // 기존에 표시된 메시지가 있으면 복사본 생성
                 if !aiLabel.isHidden {
                     createCopyLabel(from: aiLabel)
                 }
-
-                // 새 메시지 표시 (깔끔한 중앙 정렬)
                 aiLabel.text = message.text
                 aiLabel.textAlignment = .center
                 aiLabel.isHidden = false
             }
         }
 
-        // 레이아웃 업데이트
         view.layoutIfNeeded()
 
-        // 스크롤을 맨 아래로 이동
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.scrollToBottom()
         }
     }
 
     private func createCopyLabel(from originalLabel: UILabel) {
-        // 기존 Label의 복사본 생성
         let copyLabel = UILabel()
         copyLabel.text = originalLabel.text
         copyLabel.numberOfLines = originalLabel.numberOfLines
@@ -322,26 +473,18 @@ extension ChatDetailViewController {
         copyLabel.layer.masksToBounds = originalLabel.layer.masksToBounds
         copyLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        // StackView에서 원본 Label의 위치 찾기
         if let index = stackView.arrangedSubviews.firstIndex(of: originalLabel) {
-            // 원본 Label 위치에 복사본 삽입
             stackView.insertArrangedSubview(copyLabel, at: index)
 
-            // 컨텐츠에 맞는 크기 설정
             copyLabel.setContentHuggingPriority(.required, for: .vertical)
             copyLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
-            // 중앙 정렬을 위한 제약 조건 개선
             NSLayoutConstraint.activate([
-                // 최소 높이 설정 (패딩 포함)
                 copyLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 44),
-                // 최대 너비를 80%로 제한하여 말풍선 느낌
                 copyLabel.widthAnchor.constraint(lessThanOrEqualTo: stackView.widthAnchor, multiplier: 0.8),
-                // 최소 너비 설정으로 너무 작아지지 않게
                 copyLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 60)
             ])
 
-            // 텍스트 내부 패딩을 위한 inset 설정
             copyLabel.layer.masksToBounds = true
         }
     }
@@ -372,23 +515,9 @@ extension ChatDetailViewController {
 
         chatTextField.text = ""
 
-        generateAIResponse(to: messageText)
-    }
-
-    private func generateAIResponse(to userMessage: String) {
-        guard let character = selectedCharacter else { return }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            let responses = [
-                "네, 그런 마음이 드셨군요. \(character.emoji) 더 자세히 말씀해 주시겠어요?",
-                "정말 소중한 경험이셨네요. 그때의 감정을 조금 더 표현해보세요.",
-                "그 순간이 왜 특별하게 느껴졌을까요? \(character.emoji)",
-                "좋은 이야기네요! 비슷한 경험이 또 있으신가요?"
-            ]
-
-            let randomResponse = responses.randomElement() ?? "네, 이해합니다."
-            let aiMessage = ChatMessage(text: randomResponse, isFromUser: false, timestamp: Date())
-            self.addMessage(aiMessage)
+        // OpenAI API로 응답 생성
+        Task {
+            await generateAIResponse(to: messageText)
         }
     }
 }

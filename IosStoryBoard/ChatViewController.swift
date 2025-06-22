@@ -46,29 +46,29 @@ class ChatViewController: UIViewController {
     private var chatMessages: [ChatMessage] = []
 
     // MARK: - Character Data
-    private let characters: [Character] = [
-        Character(
-            id: "sakura",
-            emoji: "🌸",
-            name: "사쿠라",
-            description: "따뜻하고 공감적인 성격으로 감정을 세심하게 읽어주는 친구",
-            assistantID: "asst_sakura123"
-        ),
-        Character(
-            id: "owl",
-            emoji: "🦉",
-            name: "올빼미 박사",
-            description: "논리적이고 체계적인 사고로 깊이 있는 대화를 나누는 현명한 상담사",
-            assistantID: "asst_owl456"
-        ),
-        Character(
-            id: "rabbit",
-            emoji: "🐰",
-            name: "토끼",
-            description: "활발하고 긍정적인 에너지로 즐거운 대화를 이끌어가는 발랄한 친구",
-            assistantID: "asst_rabbit789"
-        )
-    ]
+        private let characters: [Character] = [
+            Character(
+                id: "sakura",
+                emoji: "🌸",
+                name: "사쿠라",
+                description: "따뜻하고 공감적인 감정 상담사",
+                assistantID: "asst_sakura123"
+            ),
+            Character(
+                id: "owl",
+                emoji: "🦉",
+                name: "올빼미 박사",
+                description: "논리적이고 현명한 심리 상담사",
+                assistantID: "asst_owl456"
+            ),
+            Character(
+                id: "rabbit",
+                emoji: "🐰",
+                name: "토끼",
+                description: "활발하고 긍정적인 에너지 상담사",
+                assistantID: "asst_rabbit789"
+            )
+        ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
