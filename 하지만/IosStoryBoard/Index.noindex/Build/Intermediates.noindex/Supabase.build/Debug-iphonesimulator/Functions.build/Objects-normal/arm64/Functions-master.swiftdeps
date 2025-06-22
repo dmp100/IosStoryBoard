@@ -1,0 +1,11 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "558ed615a65257583509e418f40fca403160111e45d49f4b0327e508524570ee"
+build_start_time: [1750575985, 600872000]
+build_end_time: [1750575986, 47186000]
+inputs:
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Functions/Exports.swift"
+  : [1750575859, 747811780]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Functions/FunctionsClient.swift"
+  : [1750575859, 748043822]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Functions/Types.swift"
+  : [1750575859, 748203239]

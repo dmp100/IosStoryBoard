@@ -1,0 +1,45 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "969c5aa7f54572de7c40575d9f08a04a5c5f2410c26b486c762be1c580dd88ff"
+build_start_time: [1750575985, 28771000]
+build_end_time: [1750575986, 49246000]
+inputs:
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/ErrorReporting.swift"
+  : [1750575698, 180677219]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/AppHostWarning.swift"
+  : [1750575698, 180829010]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/Deprecations.swift"
+  : [1750575698, 180905969]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/FailureObserver.swift"
+  : [1750575698, 181543719]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/LockIsolated.swift"
+  : [1750575698, 181632677]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/Rethrows.swift"
+  : [1750575698, 182131594]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/SwiftTesting.swift"
+  : [1750575698, 182248386]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/UncheckedSendable.swift"
+  : [1750575698, 182317344]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/Warn.swift"
+  : [1750575698, 182385720]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Internal/XCTest.swift"
+  : [1750575698, 182463220]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/IsTesting.swift"
+  : [1750575698, 182525970]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/IssueReporter.swift"
+  : [1750575698, 182688303]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/IssueReporters/BreakpointReporter.swift"
+  : [1750575698, 182806261]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/IssueReporters/FatalErrorReporter.swift"
+  : [1750575698, 182884595]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/IssueReporters/RuntimeWarningReporter.swift"
+  : [1750575698, 182950011]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/ReportIssue.swift"
+  : [1750575698, 183109761]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/TestContext.swift"
+  : [1750575698, 183312678]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/Unimplemented.swift"
+  : [1750575698, 183537637]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/WithExpectedIssue.swift"
+  : [1750575698, 183771845]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/xctest-dynamic-overlay/Sources/IssueReporting/WithIssueContext.swift"
+  : [1750575698, 183850012]

@@ -1,0 +1,24 @@
+{
+  "" : {
+    "dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/Supabase.build/Debug-iphonesimulator/Supabase.build/Objects-normal/arm64/Supabase-master.d",
+    "diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/Supabase.build/Debug-iphonesimulator/Supabase.build/Objects-normal/arm64/Supabase-master.dia",
+    "emit-module-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/Supabase.build/Debug-iphonesimulator/Supabase.build/Objects-normal/arm64/Supabase-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/Supabase.build/Debug-iphonesimulator/Supabase.build/Objects-normal/arm64/Supabase-master-emit-module.dia",
+    "swift-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/Supabase.build/Debug-iphonesimulator/Supabase.build/Objects-normal/arm64/Supabase-master.swiftdeps"
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Constants.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Deprecated.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Exports.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/SupabaseClient.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Types.swift" : {
+
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "" : {
+    "dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphoneos/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-master.d",
+    "diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphoneos/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-master.dia",
+    "emit-module-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphoneos/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphoneos/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-master-emit-module.dia",
+    "swift-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-concurrency-extras.build/Debug-iphoneos/ConcurrencyExtras.build/Objects-normal/arm64/ConcurrencyExtras-master.swiftdeps"
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/ActorIsolated.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/AnyHashableSendable.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/AsyncStream.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/AsyncThrowingStream.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Internal/Locking.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Internal/UncheckedBox.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/LockIsolated.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/MainSerialExecutor.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Result.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/Task.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-concurrency-extras/Sources/ConcurrencyExtras/UncheckedSendable.swift" : {
+
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : true,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "50c5523e0f119b3743a77685fe390d79e9d4315239f17f931a47ef9e3a82b437"
+    }
+  ],
+  "containerPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/IosStoryBoard.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "indexbuild",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator18.5",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Products",
+      "derivedDataPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만",
+      "indexDataStoreFolderPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/PrecompiledHeaders",
+      "indexRegularBuildIntermediatesPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Build/Intermediates.noindex",
+      "indexRegularBuildProductsPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Build/Products",
+      "pchPath" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "default",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

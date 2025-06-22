@@ -1,0 +1,15 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "ca947311b00b4fc09349c67b7e252fdc4d4fa1e4859ca308ae80365882814995"
+build_start_time: [1750575985, 884474000]
+build_end_time: [1750575986, 52690000]
+inputs:
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Constants.swift"
+  : [1750575859, 758112619]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Deprecated.swift"
+  : [1750575859, 758190786]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Exports.swift"
+  : [1750575859, 758256411]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/SupabaseClient.swift"
+  : [1750575859, 758354119]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Supabase/Types.swift"
+  : [1750575859, 758507786]

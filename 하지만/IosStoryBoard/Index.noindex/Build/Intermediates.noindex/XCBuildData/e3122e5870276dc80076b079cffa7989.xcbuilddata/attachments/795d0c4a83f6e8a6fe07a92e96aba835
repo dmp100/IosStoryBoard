@@ -1,0 +1,33 @@
+{
+  "" : {
+    "dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-clocks.build/Debug-iphoneos/Clocks.build/Objects-normal/arm64/Clocks-master.d",
+    "diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-clocks.build/Debug-iphoneos/Clocks.build/Objects-normal/arm64/Clocks-master.dia",
+    "emit-module-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-clocks.build/Debug-iphoneos/Clocks.build/Objects-normal/arm64/Clocks-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-clocks.build/Debug-iphoneos/Clocks.build/Objects-normal/arm64/Clocks-master-emit-module.dia",
+    "swift-dependencies" : "/Users/seong-gyuhyeon/Documents/GitHub/IosStoryBoard/하지만/IosStoryBoard/Index.noindex/Build/Intermediates.noindex/swift-clocks.build/Debug-iphoneos/Clocks.build/Objects-normal/arm64/Clocks-master.swiftdeps"
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/AnyClock.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/ImmediateClock.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/Internal/Lock.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/Internal/_AsyncTimerSequence.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/SwiftUI.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/TestClock.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/Timer.swift" : {
+
+  },
+  "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/swift-clocks/Sources/Clocks/UnimplementedClock.swift" : {
+
+  }
+}

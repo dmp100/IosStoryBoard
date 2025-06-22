@@ -1,0 +1,49 @@
+version: "Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)"
+options: "c3a6055675839378c41f31e9da843b926c32a7aceb55c01f5e77fa46c651d600"
+build_start_time: [1750575985, 404394000]
+build_end_time: [1750575986, 46207000]
+inputs:
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/AnyJSON/AnyJSON+Codable.swift"
+  : [1750575859, 748391239]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/AnyJSON/AnyJSON.swift"
+  : [1750575859, 748556531]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/AsyncValueSubject.swift"
+  : [1750575859, 748716031]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/Codable.swift"
+  : [1750575859, 748779573]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/DateFormatter.swift"
+  : [1750575859, 748842573]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/EventEmitter.swift"
+  : [1750575859, 748907406]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/FoundationExtensions.swift"
+  : [1750575859, 748973281]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/HTTPClient.swift"
+  : [1750575859, 749073114]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/HTTPFields.swift"
+  : [1750575859, 749139489]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/HTTPRequest.swift"
+  : [1750575859, 749203989]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/HTTPResponse.swift"
+  : [1750575859, 749271114]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/LoggerInterceptor.swift"
+  : [1750575859, 749338448]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/HTTP/RetryRequestInterceptor.swift"
+  : [1750575859, 749508698]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/JWT.swift"
+  : [1750575859, 749570490]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/SharedModels/HTTPError.swift"
+  : [1750575859, 749672490]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/SharedModels/PostgrestError.swift"
+  : [1750575859, 749737573]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/SupabaseLogger.swift"
+  : [1750575859, 749889615]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/Task+withTimeout.swift"
+  : [1750575859, 749953281]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/TaskLocalHelpers.swift"
+  : [1750575859, 750017365]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/URLSession+AsyncAwait.swift"
+  : [1750575859, 750182573]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/Version.swift"
+  : [1750575859, 750248032]
+  ? "/Users/seong-gyuhyeon/Library/Developer/Xcode/DerivedData/IosStoryBoard-aznujaysuajfuabxiyffxeulhdxb/SourcePackages/checkouts/supabase-swift/Sources/Helpers/_Clock.swift"
+  : [1750575859, 750317240]
