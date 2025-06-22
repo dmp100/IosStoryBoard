@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Supabase
 
 class ListViewController: UIViewController {
 
@@ -161,8 +162,13 @@ class ListViewController: UIViewController {
         label.layer.cornerRadius = 8
         label.layer.masksToBounds = true
 
+        // 제약조건 충돌 해결: translatesAutoresizingMaskIntoConstraints 설정
+        label.translatesAutoresizingMaskIntoConstraints = false
+
         // 패딩 효과를 위한 높이 설정
-        label.heightAnchor.constraint(greaterThanOrEqualToConstant: 36).isActive = true
+        NSLayoutConstraint.activate([
+            label.heightAnchor.constraint(greaterThanOrEqualToConstant: 36)
+        ])
     }
 
     private func setupGratitudeLabel(_ label: UILabel) {
@@ -235,64 +241,94 @@ class ListViewController: UIViewController {
         let selectedDate = datePicker.date
         print("선택된 날짜: \(selectedDate)")
 
-        // 선택된 날짜의 일기 표시
-        showDiaryForDate(selectedDate)
+        // 선택된 날짜의 일기 새로 불러오기
+        loadDiaryEntries()
+    }
+
+    // MARK: - Supabase Data Loading
+    private func fetchGratitudeEntries(for date: Date) async throws -> [DiaryEntry] {
+        guard let userId = supabase.auth.currentUser?.id else {
+            print("❌ 로그인된 사용자가 없음")
+            throw NSError(domain: "Auth", code: 401, userInfo: [NSLocalizedDescriptionKey: "로그인이 필요합니다"])
+        }
+
+        print("🔍 사용자 ID: \(userId.uuidString)")
+        print("🔍 조회할 날짜: \(date)")
+
+        // 일단 모든 사용자 데이터를 가져와서 확인해보기
+        let data: [GratitudeDiaryResponse] = try await supabase
+            .from("gratitude_diaries")
+            .select()
+            .eq("user_id", value: userId.uuidString)
+            .order("created_at", ascending: false) // 최신순으로 정렬
+            .execute()
+            .value
+
+        print("✅ 사용자의 전체 데이터 개수: \(data.count)")
+
+        // ISO8601DateFormatter 사용 (더 정확한 파싱)
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        // UTC 시간대로 Calendar와 DateFormatter 설정 (데이터베이스와 동일하게)
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(identifier: "UTC")!
+
+        // 날짜만 비교하기 위한 DateFormatter (UTC 기준)
+        let dateOnlyFormatter = DateFormatter()
+        dateOnlyFormatter.dateFormat = "yyyy-MM-dd"
+        dateOnlyFormatter.timeZone = TimeZone(identifier: "UTC")
+
+        let selectedDateString = dateOnlyFormatter.string(from: date)
+        print("🔍 선택된 날짜 문자열 (UTC): \(selectedDateString)")
+
+        var matchingItems: [GratitudeDiaryResponse] = []
+
+        for item in data {
+            if let createdDate = isoFormatter.date(from: item.created_at) {
+                let createdDateString = dateOnlyFormatter.string(from: createdDate)
+
+                if createdDateString == selectedDateString {
+                    matchingItems.append(item)
+                    print("✅ 날짜 일치: \(item.content) (시간: \(item.created_at))")
+                }
+            } else {
+                print("❌ 날짜 파싱 실패: \(item.created_at)")
+            }
+        }
+
+        if !matchingItems.isEmpty {
+            // 최신 3개만 가져오기 (이미 order by created_at desc로 정렬되어 있음)
+            let latest3Items = Array(matchingItems.prefix(3))
+            let contentList = latest3Items.map { $0.content }
+
+            let entry = DiaryEntry(date: date, gratitudeTexts: contentList)
+            print("✅ DiaryEntry 생성됨: \(contentList.count)개 항목 (최신 3개)")
+            print("📝 표시할 내용: \(contentList)")
+            return [entry]
+        }
+
+        print("❌ 해당 날짜에 감사일기 내용이 없음")
+        return []
     }
 
     // MARK: - Data Loading
     private func loadDiaryEntries() {
-        createSampleData()
-    }
-
-    private func createSampleData() {
-        // 여러 날짜의 샘플 데이터 생성 (짧은 텍스트로 수정)
-        let calendar = Calendar.current
-        let today = Date()
-        let yesterday = calendar.date(byAdding: .day, value: -1, to: today) ?? today
-        let twoDaysAgo = calendar.date(byAdding: .day, value: -2, to: today) ?? today
-        let threeDaysAgo = calendar.date(byAdding: .day, value: -3, to: today) ?? today
-
-        diaryEntries = [
-            // 오늘 - 첫 번째 일기 (짧은 텍스트)
-            DiaryEntry(
-                date: today,
-                gratitudeTexts: [
-                    "따뜻한 아침 햇살을 받으며 하루를 시작했다",
-                    "동료가 맛있는 커피를 사주어서 감사했다",
-                    "가족과 함께 저녁식사를 할 수 있었다"
-                ]
-            ),
-            // 오늘 - 두 번째 일기 (같은 날 테스트)
-            DiaryEntry(
-                date: today,
-                gratitudeTexts: [
-                    "친구와 즐거운 대화를 나눌 수 있었다",
-                    "새로운 아이디어가 떠올라서 신났다",
-                    "건강한 하루를 보낼 수 있어서 감사했다"
-                ]
-            ),
-            DiaryEntry(
-                date: yesterday,
-                gratitudeTexts: [
-                    "새로운 프로젝트를 시작하게 되어 설렜다",
-                    "친구에게서 오랜만에 연락이 왔다",
-                    "건강하게 하루를 마무리할 수 있었다"
-                ]
-            ),
-            DiaryEntry(
-                date: twoDaysAgo,
-                gratitudeTexts: [
-                    "맛있는 점심을 먹을 수 있어서 감사했다",
-                    "날씨가 좋아서 산책을 할 수 있었다"
-                ]
-            ),
-            DiaryEntry(
-                date: threeDaysAgo,
-                gratitudeTexts: [
-                    "좋은 책을 읽으며 여유로운 시간을 보냈다"
-                ]
-            )
-        ]
+        Task {
+            do {
+                let entries = try await fetchGratitudeEntries(for: datePicker.date)
+                DispatchQueue.main.async {
+                    self.diaryEntries = entries
+                    self.showDiaryForDate(self.datePicker.date)
+                }
+            } catch {
+                print("데이터 불러오기 실패:", error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.diaryEntries = []
+                    self.showDiaryForDate(self.datePicker.date)
+                }
+            }
+        }
     }
 
     private func showDiaryForDate(_ selectedDate: Date) {
@@ -313,12 +349,16 @@ class ListViewController: UIViewController {
             formatter.dateFormat = "yyyy.MM.dd EEEE"
             card1Label1.text = formatter.string(from: firstEntry.date)
 
-            // 감사 내용 설정 (한 줄에 맞게 짧게)
+            // 감사 내용 설정 (최대 3개까지만 표시)
             let gratitudeLabels = [card1Label2, card1Label3, card1Label4]
 
-            for (index, text) in firstEntry.gratitudeTexts.enumerated() {
+            // 최대 3개까지만 표시하도록 제한
+            let maxDisplayCount = min(firstEntry.gratitudeTexts.count, gratitudeLabels.count)
+
+            for index in 0..<maxDisplayCount {
                 guard index < gratitudeLabels.count else { break }
 
+                let text = firstEntry.gratitudeTexts[index]
                 // 텍스트 앞에 공백 추가해서 왼쪽 여백 효과
                 let paddedText = "  \(index + 1). \(text)" // 앞에 공백 2개 추가
 
@@ -327,7 +367,7 @@ class ListViewController: UIViewController {
             }
 
             // 사용하지 않는 라벨들 숨김
-            for index in firstEntry.gratitudeTexts.count..<gratitudeLabels.count {
+            for index in maxDisplayCount..<gratitudeLabels.count {
                 gratitudeLabels[index]?.isHidden = true
             }
 
@@ -336,6 +376,11 @@ class ListViewController: UIViewController {
                 print("📝 \(formatter.string(from: selectedDate))에 \(selectedEntries.count)개의 일기가 있음 (첫 번째 표시)")
             } else {
                 print("✅ \(formatter.string(from: selectedDate))의 일기 표시됨")
+            }
+
+            // 3개보다 많은 감사일기가 있으면 알림
+            if firstEntry.gratitudeTexts.count > 3 {
+                print("⚠️ 감사일기가 \(firstEntry.gratitudeTexts.count)개 있지만 3개만 표시됨")
             }
         } else {
             // 일기가 없는 경우
@@ -360,34 +405,5 @@ class ListViewController: UIViewController {
             return shortened + "..."
         }
     }
-
-    // MARK: - 실제 데이터 연동 준비
-    private func loadRealDiaryData() {
-        // TODO: HomeViewController에서 저장된 데이터 불러오기
-        // UserDefaults, CoreData, 또는 Firebase 연동
-
-        // 예시:
-        // if let savedData = UserDefaults.standard.data(forKey: "diaryEntries") {
-        //     let decoder = JSONDecoder()
-        //     diaryEntries = try? decoder.decode([DiaryEntry].self, from: savedData) ?? []
-        // }
-    }
-
-    private func saveDiaryData() {
-        // TODO: 데이터 저장 로직
-        // let encoder = JSONEncoder()
-        // if let encoded = try? encoder.encode(diaryEntries) {
-        //     UserDefaults.standard.set(encoded, forKey: "diaryEntries")
-        // }
-    }
 }
 
-// MARK: - 데이터 모델
-struct DiaryEntry: Codable {
-    let date: Date
-    let gratitudeTexts: [String]
-
-    // 확장 가능한 속성들
-    // let mood: String?
-    // let weather: String?
-}
