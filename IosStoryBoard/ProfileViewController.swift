@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Supabase
 
 class ProfileViewController: UIViewController {
 
@@ -33,7 +34,9 @@ class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateStatistics() // 다른 탭에서 일기 작성 시 통계 업데이트
+        Task {
+            await updateStatistics() // 다른 탭에서 일기 작성 시 통계 업데이트
+        }
     }
 }
 
@@ -106,82 +109,184 @@ extension ProfileViewController {
         statLabel4.textColor = UIColor(red: 52/255, green: 199/255, blue: 89/255, alpha: 1.0)
         statLabel4.textAlignment = .center
     }
-
-    private func setupMenuContainer() {
-        // 설정 메뉴 없음 - 이 함수 제거됨
-    }
-
-    private func setupConstraints() {
-        // 필요시 추가 제약조건 설정
-        profileHeaderContainer.translatesAutoresizingMaskIntoConstraints = false
-        statsContainer.translatesAutoresizingMaskIntoConstraints = false
-    }
 }
 
 // MARK: - Data Loading
 extension ProfileViewController {
 
     private func loadUserData() {
-        // 사용자 아이디 로드 (실제로는 UserDefaults나 저장된 데이터에서 가져옴)
-        let userID = UserDefaults.standard.string(forKey: "userID") ?? "사용자"
-        profileLabel1.text = "🌱 \(userID)"
-
-        // 사용 기간 계산 (앱 설치일 기준)
-        let daysSinceInstall = calculateDaysSinceInstall()
-        profileLabel2.text = "감사일기와 함께한 지 \(daysSinceInstall)일"
-
-        // 통계 업데이트
-        updateStatistics()
-    }
-
-    private func updateStatistics() {
-        // 총 감사 개수 계산 (실제로는 저장된 데이터에서 계산)
-        let totalGratitudeCount = calculateTotalGratitudeCount()
-        statLabel3.text = "\(totalGratitudeCount)"
-
-        // 연속 작성일 계산
-        let consecutiveDays = calculateConsecutiveDays()
-        statLabel4.text = "\(consecutiveDays)"
-    }
-
-    private func calculateDaysSinceInstall() -> Int {
-        // 앱 최초 실행일을 저장하고 계산
-        let firstLaunchKey = "firstLaunchDate"
-
-        if let firstLaunchDate = UserDefaults.standard.object(forKey: firstLaunchKey) as? Date {
-            let calendar = Calendar.current
-            let days = calendar.dateComponents([.day], from: firstLaunchDate, to: Date()).day ?? 0
-            return max(1, days) // 최소 1일
-        } else {
-            // 첫 실행인 경우 현재 날짜 저장
-            UserDefaults.standard.set(Date(), forKey: firstLaunchKey)
-            return 1
+        Task {
+            await loadUserProfile()
         }
     }
 
-    private func calculateTotalGratitudeCount() -> Int {
-        // 실제로는 저장된 모든 감사일기의 개수를 계산
-        // 현재는 샘플 데이터로 임시 계산
+    private func loadUserProfile() async {
+        guard let user = supabase.auth.currentUser else {
+            print("❌ 로그인된 사용자가 없음")
+            return
+        }
 
-        // 예시: HomeViewController에서 저장한 감사일기 개수 계산
-        // UserDefaults나 CoreData에서 실제 데이터를 가져와야 함
+        // 사용자 이메일 표시
+        let userEmail = user.email ?? "사용자"
+        let displayName = userEmail.components(separatedBy: "@").first ?? userEmail
 
-        // 임시로 날짜별 샘플 데이터 기반 계산
-        return 45 // 15일 × 3개씩 = 45개 (임시값)
+        await MainActor.run {
+            profileLabel1.text = "🌱 \(displayName)"
+        }
+
+        // 사용자의 첫 감사일기 작성일 조회
+        await loadUserStartDate(userId: user.id.uuidString)
+
+        // 통계 업데이트
+        await updateStatistics()
     }
 
-    private func calculateConsecutiveDays() -> Int {
-        // 실제로는 연속으로 일기를 작성한 날짜를 계산
-        // 현재는 샘플값 반환
-        return 15 // 임시값
+    private func loadUserStartDate(userId: String) async {
+        do {
+            let response: [GratitudeDiaryResponse] = try await supabase
+                .from("gratitude_diaries")
+                .select()
+                .eq("user_id", value: userId)
+                .order("created_at", ascending: true)
+                .limit(1)
+                .execute()
+                .value
+
+            if let firstEntry = response.first {
+                let createdAt = firstEntry.created_at
+
+                let formatter = ISO8601DateFormatter()
+                formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+                if let firstDate = formatter.date(from: createdAt) {
+                    let daysSince = Calendar.current.dateComponents([.day], from: firstDate, to: Date()).day ?? 0
+                    let totalDays = max(1, daysSince + 1)
+
+                    await MainActor.run {
+                        profileLabel2.text = "감사일기와 함께한 지 \(totalDays)일"
+                    }
+                    print("✅ 첫 감사일기 작성일: \(firstDate), 경과일: \(totalDays)일")
+                } else {
+                    print("❌ 날짜 파싱 실패: \(createdAt)")
+                }
+            } else {
+                await MainActor.run {
+                    profileLabel2.text = "오늘부터 감사일기 시작!"
+                }
+                print("📝 첫 감사일기가 아직 없음")
+            }
+        } catch {
+            print("❌ 사용자 시작일 조회 실패: \(error)")
+            await MainActor.run {
+                profileLabel2.text = "감사일기와 함께하는 여정"
+            }
+        }
     }
-}
 
-// MARK: - Button Actions
-extension ProfileViewController {
+    private func updateStatistics() async {
+        guard let user = supabase.auth.currentUser else { return }
 
-    // 현재 설정 버튼이 없으므로 이 섹션은 비워둠
-    // 향후 필요시 버튼 액션 추가 가능
+        // 총 감사 개수와 연속 작성일을 동시에 계산
+        async let totalCount = calculateTotalGratitudeCount(userId: user.id.uuidString)
+        async let consecutiveDays = calculateConsecutiveDays(userId: user.id.uuidString)
+
+        let (total, consecutive) = await (totalCount, consecutiveDays)
+
+        await MainActor.run {
+            statLabel3.text = "\(total)"
+            statLabel4.text = "\(consecutive)"
+        }
+    }
+
+    private func calculateTotalGratitudeCount(userId: String) async -> Int {
+        do {
+            let response: [GratitudeDiaryResponse] = try await supabase
+                .from("gratitude_diaries")
+                .select()
+                .eq("user_id", value: userId)
+                .execute()
+                .value
+
+            let count = response.count
+            print("✅ 총 감사일기 개수: \(count)")
+            return count
+        } catch {
+            print("❌ 총 감사일기 개수 조회 실패: \(error)")
+            return 0
+        }
+    }
+
+    private func calculateConsecutiveDays(userId: String) async -> Int {
+        do {
+            let response: [GratitudeDiaryResponse] = try await supabase
+                .from("gratitude_diaries")
+                .select()
+                .eq("user_id", value: userId)
+                .order("created_at", ascending: false)
+                .execute()
+                .value
+
+            guard !response.isEmpty else {
+                print("📝 감사일기가 없어서 연속일 = 0")
+                return 0
+            }
+
+            // 날짜별로 그룹화
+            var uniqueDates: Set<String> = []
+
+            for entry in response {
+                let createdAt = entry.created_at
+                let formatter = ISO8601DateFormatter()
+                formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+                guard let date = formatter.date(from: createdAt) else { continue }
+
+                let utcCalendar = Calendar(identifier: .gregorian)
+                let utcTimeZone = TimeZone(identifier: "UTC")!
+                let dateFormatter = DateFormatter()
+                dateFormatter.calendar = utcCalendar
+                dateFormatter.timeZone = utcTimeZone
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+
+                let dateString = dateFormatter.string(from: date)
+                uniqueDates.insert(dateString)
+            }
+
+            // 날짜 배열로 변환하고 정렬
+            let sortedDates = uniqueDates.sorted(by: >)
+
+            if sortedDates.isEmpty {
+                return 0
+            }
+
+            // 연속일 계산
+            var consecutiveCount = 1
+            let calendar = Calendar.current
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+
+            for i in 1..<sortedDates.count {
+                guard let currentDate = dateFormatter.date(from: sortedDates[i-1]),
+                      let nextDate = dateFormatter.date(from: sortedDates[i]) else { break }
+
+                let daysBetween = calendar.dateComponents([.day], from: nextDate, to: currentDate).day ?? 0
+
+                if daysBetween == 1 {
+                    consecutiveCount += 1
+                } else {
+                    break
+                }
+            }
+
+            print("✅ 연속 작성일: \(consecutiveCount)일")
+            print("📝 작성한 날짜들: \(sortedDates.prefix(5))")
+            return consecutiveCount
+
+        } catch {
+            print("❌ 연속 작성일 계산 실패: \(error)")
+            return 0
+        }
+    }
 }
 
 // MARK: - Helper Methods
