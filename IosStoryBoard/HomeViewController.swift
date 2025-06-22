@@ -4,7 +4,7 @@
 //
 //  Created by 성규현 on 6/20/25.
 //
-
+import Supabase
 import UIKit
 
 class HomeViewController: UIViewController {
@@ -175,26 +175,44 @@ class HomeViewController: UIViewController {
     @objc private func saveButtonTapped() {
         print("감사일기 저장 버튼 탭됨")
 
-        var gratitudeTexts: [String] = []
+        var gratitudeEntries: [GratitudeDiaryEntry] = []
         let textViews = [textView1, textView2, textView3]
 
         for textView in textViews {
             guard let textView = textView else { continue }
-            if !textView.text.isEmpty && !textView.text.contains("감사한 일을 적어보세요") {
-                gratitudeTexts.append(textView.text)
+            if !textView.text.isEmpty && !textView.text.contains("적어보세요") {
+                guard let userUUID = supabase.auth.currentUser?.id else {
+                    showAlert(message: "로그인이 필요합니다.")
+                    return
+                }
+                let userIdString = userUUID.uuidString
+                let entry = GratitudeDiaryEntry(user_id: userIdString, content: textView.text)
+                gratitudeEntries.append(entry)
             }
         }
 
-        // LoginViewController와 동일한 검증 방식
-        if gratitudeTexts.isEmpty {
+        if gratitudeEntries.isEmpty {
             showAlert(message: "감사한 일을 하나 이상 적어주세요.")
             return
         }
 
-        // TODO: 나중에 데이터베이스에 저장하는 로직 추가
-        showAlert(message: "감사일기가 저장되었습니다! 🌱")
-        clearTextViews()
+        Task {
+            do {
+                let _ = try await supabase
+                    .from("gratitude_diaries")
+                    .insert(gratitudeEntries)
+                    .execute()
+
+
+                showAlert(message: "감사일기가 저장되었습니다! 🌱")
+                clearTextViews()
+            } catch {
+                print("저장 오류:", error.localizedDescription)
+                showAlert(message: "감사일기 저장 중 오류가 발생했습니다.")
+            }
+        }
     }
+
 
     private func clearTextViews() {
         let placeholders = [
