@@ -25,7 +25,7 @@ class ChatDetailViewController: UIViewController {
     private var chatMessages: [ChatMessage] = []
 
     // OpenAI 설정
-    private let apiKey = ""
+    private let apiKey = "YOUR_OPENAI_API_KEY" // 여기에 실제 OpenAI API 키를 입력하세요
     private let apiURL = "https://api.openai.com/v1/chat/completions"
     private var conversationHistory: [[String: Any]] = []
     private var currentGratitudeDiary: String = ""
