@@ -15,11 +15,19 @@
 <br/>
 
 ## 📱 **Screenshot**
-| 홈 | 채팅 | 리스트 | 프로필 | 로그인 | 회원가입 |
-|:---:|:---:|:---:|:---:|:---:|:---:|
-| 홈 화면 | 채팅 화면 | 목록 화면 | 프로필 화면 | 로그인 화면 | 회원가입 화면 |
+
+| 일기작성 | 채팅 | 리스트 |
+|:---:|:---:|:---:|
+| <img width="200" src="https://github.com/user-attachments/assets/9a34f534-c671-47ef-a158-8c9aa63d491c"/> | <img width="200" src="https://github.com/user-attachments/assets/02a97857-11c7-4bd2-bd78-38bdb2197024"/> | <img width="200" src="https://github.com/user-attachments/assets/9e60302e-7c0e-4f86-8d1d-bb14c2878aa6"/> |
+
+| 프로필 | 로그인 | 회원가입 |
+|:---:|:---:|:---:|
+| <img width="200" src="https://github.com/user-attachments/assets/be5bfb46-16f3-4bb3-ab1f-fb4e7b66592a"/> | <img width="200" src="https://github.com/user-attachments/assets/bd0f0f3e-faa9-414e-92b8-a6cfec7b6db5"/> | <img width="200" src="https://github.com/user-attachments/assets/825215fb-e2e6-4526-aef1-4bfd5ad91256"/> |
+
 
 <br/>
+
+
 
 ## 📗 **Convention**
 [📱 iOS 개발 가이드](https://developer.apple.com/kr/ios/)
